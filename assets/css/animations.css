@@ -83,3 +83,20 @@
   animation: glow-shift 4s infinite ease-in-out;
 }
 
+/* 3D Ticket Flip Animation */
+@keyframes ticket-flip-3d {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(65deg) translateY(35px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0deg) translateY(0) scale(1);
+  }
+}
+
+.modal.open .ticket-card {
+  animation: ticket-flip-3d 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-style: preserve-3d;
+}
+
