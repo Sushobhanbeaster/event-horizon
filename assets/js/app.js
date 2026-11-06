@@ -1057,3 +1057,4 @@ class PulseApp {
 document.addEventListener("DOMContentLoaded", () => {
   window.app = new PulseApp();
 });
+

@@ -391,3 +391,4 @@ const FALLBACK_CATEGORY_IMAGES = {
   workshop: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
   sports: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=1200&q=80"
 };
+

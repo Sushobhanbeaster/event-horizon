@@ -158,3 +158,4 @@ The registration system implements the following rigorous validation rules:
 
 ## 📄 License & Academic Integrity
 Developed as part of the **K-Explore Web Designing Assignment**. Clean, modular, well-commented source code written in accordance with high UI/UX and accessibility standards.
+

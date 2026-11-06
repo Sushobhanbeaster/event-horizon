@@ -269,3 +269,4 @@ const TicketManager = {
     window.open(gCalUrl, "_blank");
   }
 };
+
