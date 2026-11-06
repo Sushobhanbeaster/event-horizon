@@ -78,6 +78,13 @@ susho web project/
 
 ---
 
+## 🌐 Live Deployed Links & Repository
+
+- **GitHub Repository:** [https://github.com/Sushobhanbeaster/event-horizon](https://github.com/Sushobhanbeaster/event-horizon)
+- **Live Website (GitHub Pages):** [https://sushobhanbeaster.github.io/event-horizon/](https://sushobhanbeaster.github.io/event-horizon/)
+
+---
+
 ## 🛠️ Technology Stack
 
 - **Markup:** HTML5 (Semantic elements: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`)
@@ -154,7 +161,7 @@ The registration system implements the following rigorous validation rules:
 ---
 
 ## 🎫 Digital Ticket Pass & Print Verification
-- Each confirmed registration generates a unique **Booking Reference Code** (`KP-2026-XXXX`).
+- Each confirmed registration generates a unique **Booking Reference Code** (`EH-2026-XXXX`).
 - An algorithmic **QR Code** is procedurally drawn on an HTML5 `<canvas>` containing verified booking metadata.
 - Includes full `@media print` CSS rules allowing attendees to directly click **"Download / Print Pass"** to produce an official clean PDF or printed pass with background graphics preserved.
 
