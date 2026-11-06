@@ -1050,6 +1050,20 @@ class PulseApp {
         if (target) target.scrollIntoView({ behavior: "smooth" });
       });
     }
+
+    // Demo Reset Button
+    const resetDemoBtn = document.getElementById("btn-reset-demo");
+    if (resetDemoBtn) {
+      resetDemoBtn.addEventListener("click", () => {
+        if (confirm("Reset demo data to default? This will clear test registrations and custom events.")) {
+          StorageManager.resetDemoData();
+          this.loadEvents();
+          this.updateTicketsBadge();
+          this.renderEvents();
+          this.showToast("Demo data has been reset to defaults.", "info");
+        }
+      });
+    }
   }
 }
 

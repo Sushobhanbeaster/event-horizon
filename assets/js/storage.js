@@ -211,6 +211,21 @@ const StorageManager = {
     } catch (e) {
       console.warn("StorageManager: Failed to save theme", e);
     }
+  },
+
+  /**
+   * Reset Demo Data (Clears registrations, favorites, and user-published events)
+   */
+  resetDemoData() {
+    try {
+      localStorage.removeItem(STORAGE_KEYS.REGISTRATIONS);
+      localStorage.removeItem(STORAGE_KEYS.FAVORITES);
+      localStorage.removeItem(STORAGE_KEYS.CUSTOM_EVENTS);
+      return true;
+    } catch (e) {
+      console.warn("StorageManager: Failed to reset demo data", e);
+      return false;
+    }
   }
 };
 
