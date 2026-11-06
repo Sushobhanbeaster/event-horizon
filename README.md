@@ -45,11 +45,13 @@
 - **Favorites / Wishlist:** Heart bookmark toggle on each event card that persists across browser sessions.
 - **"Host an Event" Publisher:** Enables students and club organizers to submit new events with custom dates, capacities, and venues; new events are immediately saved to `localStorage` and injected into the catalog.
 
-### 4. ✨ Animations & Micro-Interactions
+### 4. ✨ 3D Interactive Animations & Micro-Interactions
+- **Interactive 3D Hero Constellation (`scene3d.js`):** Uniform Fibonacci sphere point cloud with rotating wireframe polyhedron reacting dynamically to mouse cursor movements with smooth inertia physics.
+- **3D Perspective Card Tilt:** Event cards dynamically tilt in 3D perspective (`rotateX`, `rotateY`) on cursor hover with real-time specular light reflections / glares.
+- **3D Ticket Flip Animation:** Reveals the digital boarding pass with a perspective 3D flip when bookings are confirmed.
 - Custom pure-JavaScript canvas confetti physics engine on successful bookings.
 - Smooth modal fade-in and backdrop blur effects.
 - Dynamic input error shake animations and field status cues (green glow for valid, red for errors).
-- Card elevation and image zoom micro-interactions on hover.
 
 ---
 
@@ -62,13 +64,14 @@ susho web project/
 ├── .gitignore              # Standard git exclusion file
 └── assets/
     ├── css/
-    │   ├── styles.css      # Design tokens, themes, layouts, modals, print styles
-    │   └── animations.css  # Keyframes, confetti canvas, shake, and pulse effects
+    │   ├── styles.css      # Design tokens, themes, layouts, modals, 3D glares & print styles
+    │   └── animations.css  # Keyframes, 3D ticket flip, confetti canvas, shake, and pulse effects
     └── js/
         ├── data.js         # Curated realistic initial events dataset
         ├── storage.js      # LocalStorage engine for bookings, favorites & custom events
         ├── validation.js   # Real-time form validation rules & error UI
         ├── ticket.js       # Dynamic QR code generation & confetti engine
+        ├── scene3d.js      # Interactive 3D particle constellation & card tilt engine
         └── app.js          # Main application controller, UI event bindings & filters
 ```
 
