@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PulseEvents - A modern, responsive event discovery and registration platform for campus festivals, tech conferences, hackathons, and cultural events." />
+  <title>PulseEvents | Discover, Experience & Book Remarkable Events</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+  <!-- Canvas Confetti Container for Celebrations -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ==============================================
+       Header & Navigation
+       ============================================== -->
+  <header class="header">
+    <div class="container navbar">
+      <a href="#" class="nav-brand" aria-label="PulseEvents Homepage">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <span class="brand-title">Pulse<span class="gradient-text">Events</span></span>
+          <span class="brand-subtitle">K-EXPLORE</span>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#events-section" class="nav-link active">Explore Events</a></li>
+          <li><a href="#featured" class="nav-link">Featured Spotlight</a></li>
+          <li><a href="#about" class="nav-link">About Platform</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Host Event Button -->
+        <button class="btn btn-outline btn-sm" id="btn-host-event" title="Create and publish your event">
+          <span>+ Host Event</span>
+        </button>
+
+        <!-- My Tickets Trigger -->
+        <button class="btn btn-secondary btn-sm btn-tickets" id="nav-my-tickets" title="View my booked passes">
+          <span>🎟️ My Tickets</span>
+          <span class="ticket-badge-count" id="my-tickets-count" style="display: none;">0</span>
+        </button>
+
+        <!-- Theme Toggle (Dark / Light Mode) -->
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Light / Dark Mode">
+          <span id="theme-toggle-icon">☀️</span>
+          <span id="theme-toggle-label">Light</span>
+        </button>
+
+        <!-- Mobile Menu Trigger -->
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Navigation">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Dropdown -->
+    <div class="mobile-nav-menu" id="mobile-nav-menu">
+      <a href="#events-section" class="nav-link">Explore Events</a>
+      <a href="#featured" class="nav-link">Featured Spotlight</a>
+      <a href="#about" class="nav-link">About Platform</a>
+      <button class="btn btn-outline btn-block mt-2" onclick="document.getElementById('btn-host-event').click()">
+        + Host An Event
+      </button>
+    </div>
+  </header>
+
+  <!-- ==============================================
+       Main Content
+       ============================================== -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="featured">
+      <div class="hero-glow-blob"></div>
+
+      <div class="container hero-content">
+        <div class="hero-tagline">
+          <span class="tagline-pulse"></span>
+          <span>🔥 K-Explore Tech & Cultural Fest 2026</span>
+        </div>
+
+        <h1 class="hero-title">
+          Discover, Experience & Book <br />
+          <span class="gradient-text">Remarkable Events</span>
+        </h1>
+
+        <p class="hero-description">
+          The next-generation campus and tech event management hub. Explore premier hackathons, music festivals, coding summits, and workshops with instant digital boarding passes.
+        </p>
+
+        <!-- Hero Quick Search -->
+        <div class="hero-search-wrapper">
+          <span style="font-size: 1.1rem; margin-right: 0.5rem;">🔍</span>
+          <input type="text" id="hero-search-input" class="hero-search-input" placeholder="Search hackathons, AI summits, concerts, venues..." />
+          <button class="btn btn-primary btn-sm" id="hero-search-btn">Find Events</button>
+        </div>
+
+        <!-- Featured Mega-Event Countdown Clock -->
+        <div class="hero-countdown-box">
+          <div class="countdown-header">
+            <div class="countdown-title-wrap">
+              <span class="badge badge-featured">Headliner Event</span>
+              <h3 class="countdown-title mt-1">AI & Next-Gen Cloud Summit 2026</h3>
+              <p class="countdown-sub">Starts in Silicon Hall • Friday, Nov 20</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="hero-explore-btn">Reserve Seats</button>
+          </div>
+
+          <div class="countdown-grid">
+            <div class="countdown-item">
+              <span class="countdown-num" id="timer-days">14</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="timer-hours">08</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="timer-mins">45</span>
+              <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+              <span class="countdown-num" id="timer-secs">12</span>
+              <span class="countdown-label">Seconds</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Platform Stats -->
+        <div class="platform-stats">
+          <div class="stat-item">
+            <span class="stat-num gradient-text">24+</span>
+            <span class="stat-desc">Curated Events</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num gradient-text">12,500+</span>
+            <span class="stat-desc">Active Attendees</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num gradient-text">98%</span>
+            <span class="stat-desc">Attendee Satisfaction</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num gradient-text">Instant</span>
+            <span class="stat-desc">QR Pass Generation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Discovery & Filtering Section -->
+    <section class="events-section" id="events-section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Upcoming & Featured Events</h2>
+            <p class="section-subtitle">Browse through all live campus happenings, workshops, tournaments, and masterclasses.</p>
+          </div>
+          <span class="badge badge-tech" id="events-count-badge">Showing 8 Events</span>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="category-filters-scroll" role="tablist" aria-label="Event Categories">
+          <button class="category-pill active" data-category="all">✨ All Events</button>
+          <button class="category-pill" data-category="tech">💻 Technology & AI</button>
+          <button class="category-pill" data-category="music">🎵 Music & Cultural</button>
+          <button class="category-pill" data-category="gaming">🎮 Gaming & Esports</button>
+          <button class="category-pill" data-category="workshop">🚀 Workshops & Hackathons</button>
+          <button class="category-pill" data-category="sports">🏆 Sports & Fitness</button>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="filter-toolbar">
+          <!-- Real-Time Search Bar -->
+          <div class="search-bar-box">
+            <span>🔎</span>
+            <input type="text" id="search-input" class="search-input" placeholder="Search by title, speaker, venue, or keywords..." />
+          </div>
+
+          <!-- Selectors -->
+          <div class="filter-selectors">
+            <!-- Date Filter -->
+            <select class="custom-select" id="filter-date" aria-label="Filter by Date">
+              <option value="all">📅 All Dates</option>
+              <option value="weekend">🎉 Weekend Special</option>
+            </select>
+
+            <!-- Price Filter -->
+            <select class="custom-select" id="filter-price" aria-label="Filter by Price">
+              <option value="all">🏷️ All Prices</option>
+              <option value="free">Free Only</option>
+              <option value="paid">Paid Only</option>
+            </select>
+
+            <!-- Sort By -->
+            <select class="custom-select" id="sort-by" aria-label="Sort Events">
+              <option value="date">⚡ Date: Soonest</option>
+              <option value="popular">🔥 Most Popular</option>
+              <option value="name">🔤 Name: A to Z</option>
+            </select>
+
+            <!-- View Mode Switch -->
+            <div class="view-toggle-wrap">
+              <button class="btn-view-toggle active" id="btn-view-grid" title="Grid View" aria-label="Grid View">⊞</button>
+              <button class="btn-view-toggle" id="btn-view-list" title="List View" aria-label="List View">☰</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Events Cards Container -->
+        <div id="events-container" class="events-grid view-grid">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Highlights Section -->
+    <section class="container mb-5" id="about">
+      <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 3rem 2.5rem; text-align: center;">
+        <span class="badge badge-tech mb-2">Designed for Excellence</span>
+        <h3 style="font-family: var(--font-heading); font-size: 1.85rem; margin: 0.5rem 0 1rem;">Seamless Event Experience from Discovery to Entry</h3>
+        <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; font-size: 0.95rem;">
+          PulseEvents provides an end-to-end ticketing and event management ecosystem with client-side state persistence, real-time validation, responsive mobile adaptation, and instant digital pass verification.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; text-align: left;">
+          <div style="background: var(--bg-surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 1.75rem; margin-bottom: 0.75rem;">🛡️</div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">Smart Form Validation</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Real-time RFC email, phone, and input checks preventing fraudulent or duplicate registrations.</p>
+          </div>
+          <div style="background: var(--bg-surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 1.75rem; margin-bottom: 0.75rem;">🎫</div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">Digital Boarding Pass</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Dynamic Canvas QR code generation, printable ticket stubs, and Google Calendar sync.</p>
+          </div>
+          <div style="background: var(--bg-surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+            <div style="font-size: 1.75rem; margin-bottom: 0.75rem;">💾</div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;">LocalStorage Sync</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Persistent bookings, favorites wishlist, and dark/light mode saved locally on your device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================================
+       Event Details Modal
+       ============================================== -->
+  <div class="modal" id="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-modal-title">
+    <div class="modal-dialog">
+      <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">✕</button>
+      <div id="details-modal-content">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       Event Registration Modal
+       ============================================== -->
+  <div class="modal" id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="reg-modal-title">
+    <div class="modal-dialog modal-dialog-sm">
+      <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">✕</button>
+      
+      <div class="form-header">
+        <h3 class="form-title" id="reg-modal-title">Complete Registration</h3>
+        <p class="form-subtitle">Fill in your information to receive your verified digital ticket pass.</p>
+      </div>
+
+      <div class="reg-form-body">
+        <!-- Event Summary Preview Card -->
+        <div id="reg-event-summary">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Registration Form -->
+        <form id="registration-form" novalidate>
+          <input type="hidden" id="reg-event-id" name="eventId" />
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="reg-name" class="form-label">
+              <span>Full Name</span>
+              <span class="required-star">*</span>
+            </label>
+            <input type="text" id="reg-name" name="fullName" class="form-input" placeholder="e.g. Alex Henderson" required />
+          </div>
+
+          <!-- 2-Column: Email & Phone -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="reg-email" class="form-label">
+                <span>Email Address</span>
+                <span class="required-star">*</span>
+              </label>
+              <input type="email" id="reg-email" name="email" class="form-input" placeholder="alex@domain.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-phone" class="form-label">
+                <span>Phone Number</span>
+                <span class="required-star">*</span>
+              </label>
+              <input type="tel" id="reg-phone" name="phone" class="form-input" placeholder="10-digit number" required />
+            </div>
+          </div>
+
+          <!-- 2-Column: Ticket Tier & Quantity -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="ticket-tier-select" class="form-label">
+                <span>Ticket Tier</span>
+                <span class="required-star">*</span>
+              </label>
+              <select id="ticket-tier-select" name="ticketTier" class="form-select">
+                <option value="General Admission">General Admission</option>
+                <option value="student">Student Pass (30% Discount)</option>
+                <option value="vip">VIP Access Pass (+₹400 / Full Perks)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ticket-qty-input" class="form-label">
+                <span>Number of Tickets</span>
+                <span class="required-star">*</span>
+              </label>
+              <input type="number" id="ticket-qty-input" name="ticketQuantity" class="form-input" min="1" max="5" value="1" required />
+            </div>
+          </div>
+
+          <!-- Dietary / Special Notes -->
+          <div class="form-group">
+            <label for="reg-dietary" class="form-label">Special Requests / Accessibility (Optional)</label>
+            <input type="text" id="reg-dietary" name="dietaryNotes" class="form-input" placeholder="e.g. Wheelchair access, vegetarian lunch..." />
+          </div>
+
+          <!-- Dynamic Price Calculation Box -->
+          <div class="price-breakdown-box">
+            <span class="breakdown-label">Total Amount Payable:</span>
+            <span class="breakdown-total" id="reg-price-total">Free</span>
+          </div>
+
+          <!-- Terms & Code of Conduct Checkbox -->
+          <div class="form-group">
+            <label class="terms-label">
+              <input type="checkbox" id="reg-terms" name="terms" required />
+              <span>I agree to the Event Code of Conduct and acknowledge that tickets are subject to venue capacity policies.</span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary btn-block btn-lg mt-3" id="btn-submit-registration">
+            Confirm & Generate Pass ⚡
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       Digital Boarding Pass Ticket Confirmation Modal
+       ============================================== -->
+  <div class="modal" id="ticket-pass-modal" role="dialog" aria-modal="true" aria-labelledby="ticket-modal-title">
+    <div class="modal-dialog ticket-modal-dialog">
+      <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">✕</button>
+
+      <div class="ticket-wrapper">
+        <div id="ticket-pass-content">
+          <!-- Dynamically populated by ticket.js -->
+        </div>
+
+        <div class="ticket-actions-bar">
+          <button class="btn btn-primary btn-block" id="btn-print-ticket">
+            🖨️ Download / Print Pass
+          </button>
+          <button class="btn btn-secondary btn-block" id="btn-cal-ticket">
+            📅 Add to Google Calendar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       "My Bookings" Slide-Over Drawer
+       ============================================== -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="drawer" id="bookings-drawer" aria-labelledby="drawer-title">
+    <div class="drawer-header">
+      <h3 class="drawer-title" id="drawer-title">🎟️ My Booked Passes</h3>
+      <button class="modal-close-btn" id="btn-close-drawer" style="position: static;" aria-label="Close drawer">✕</button>
+    </div>
+
+    <div class="drawer-body" id="my-bookings-list">
+      <!-- Dynamically populated from localStorage -->
+    </div>
+  </aside>
+
+  <!-- ==============================================
+       "Host an Event" Modal (Community Organizers)
+       ============================================== -->
+  <div class="modal" id="create-event-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-sm">
+      <button class="modal-close-btn modal-close-trigger" aria-label="Close modal">✕</button>
+
+      <div class="form-header">
+        <h3 class="form-title">Host & Publish an Event</h3>
+        <p class="form-subtitle">Create a new event listing that will immediately appear in the catalog.</p>
+      </div>
+
+      <div class="reg-form-body">
+        <form id="create-event-form">
+          <div class="form-group">
+            <label class="form-label">Event Title <span class="required-star">*</span></label>
+            <input type="text" name="eventTitle" class="form-input" placeholder="e.g. Next-Gen Robotics Expo" required />
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Category <span class="required-star">*</span></label>
+              <select name="eventCategory" class="form-select" required>
+                <option value="tech">Technology & AI</option>
+                <option value="music">Music & Cultural</option>
+                <option value="gaming">Gaming & Esports</option>
+                <option value="workshop">Workshops & Hackathons</option>
+                <option value="sports">Sports & Fitness</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Event Date <span class="required-star">*</span></label>
+              <input type="date" name="eventDate" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Time Slot <span class="required-star">*</span></label>
+              <input type="text" name="eventTime" class="form-input" placeholder="e.g. 10:00 AM - 04:00 PM" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ticket Price (₹) <span class="required-star">*</span></label>
+              <input type="number" name="eventPrice" class="form-input" placeholder="0 for Free" value="0" min="0" required />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Venue / Hall <span class="required-star">*</span></label>
+              <input type="text" name="eventVenue" class="form-input" placeholder="e.g. Campus Seminar Hall 1" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Capacity <span class="required-star">*</span></label>
+              <input type="number" name="eventCapacity" class="form-input" value="150" min="10" max="2000" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cover Image URL (Optional)</label>
+            <input type="url" name="eventImage" class="form-input" placeholder="Leave empty for auto-selected category image" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Organizer / Club Name <span class="required-star">*</span></label>
+            <input type="text" name="eventOrganizer" class="form-input" placeholder="e.g. Robotics & Automation Club" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Short Description <span class="required-star">*</span></label>
+            <textarea name="eventShortDesc" class="form-textarea" rows="3" placeholder="Brief summary of what attendees will experience..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            Publish Event to Catalog 🚀
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notifications Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- ==============================================
+       Footer
+       ============================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="nav-brand">
+            <div class="brand-icon">⚡</div>
+            <span class="brand-title">Pulse<span class="gradient-text">Events</span></span>
+          </div>
+          <p class="footer-brand-desc">
+            Empowering students, developers, and creators to connect through high-impact college fests, conferences, and competitions.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Event Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#events-section" class="footer-link">Technology & AI</a></li>
+            <li><a href="#events-section" class="footer-link">Music & Cultural</a></li>
+            <li><a href="#events-section" class="footer-link">Gaming & Esports</a></li>
+            <li><a href="#events-section" class="footer-link">Workshops & Hackathons</a></li>
+            <li><a href="#events-section" class="footer-link">Sports & Athletics</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Quick Actions</h4>
+          <ul class="footer-links">
+            <li><a href="#events-section" class="footer-link">Browse All Events</a></li>
+            <li><a href="#" class="footer-link" onclick="document.getElementById('nav-my-tickets').click(); return false;">My Booked Passes</a></li>
+            <li><a href="#" class="footer-link" onclick="document.getElementById('btn-host-event').click(); return false;">Host an Event</a></li>
+            <li><a href="#featured" class="footer-link">Headliner Countdown</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Campus Hub</h4>
+          <p class="footer-brand-desc" style="margin-top: 0;">
+            K-Explore Web Designing Project<br />
+            Built with HTML5, CSS3, JavaScript.<br />
+            Fully responsive & LocalStorage powered.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 PulseEvents Platform (K-Explore). All rights reserved.</div>
+        <div>Crafted with precision for Web Designing Evaluation.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/validation.js"></script>
+  <script src="assets/js/ticket.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
