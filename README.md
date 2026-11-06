@@ -1,172 +1,93 @@
-# Event Horizon 🌌 | Next-Gen Responsive Event Management Platform
-> **K-Explore Web Designing Project & Evaluation**  
-> Built with Semantic HTML5, CSS3 Design Tokens & Glassmorphism, and Vanilla JavaScript (ES6+).
+# Event Horizon 🌌
+> **Responsive Event Management Platform**  
+> *Course Project: K Explore – Web Designing*
 
 ---
 
-## 🌟 Executive Summary
+## 1. Project Description
 
-**Event Horizon** is a modern, responsive, and visually captivating event discovery, management, and registration web application. Designed to cater to college fests, tech conventions, hackathons, and cultural festivals, the platform delivers an engaging user experience with intuitive navigation, fluid 3D animations, real-time client-side form validation, and instant digital boarding pass generation.
+**Event Horizon** is a modern, responsive, and interactive event discovery and ticketing platform designed to manage college fests, tech summits, hackathons, and cultural festivals. The platform bridges event organizers and attendees through a seamless web interface that supports real-time event discovery, category filtering, live countdown tracking, client-side validation, digital pass generation, and persistent data storage.
 
----
-
-## 🎯 Key Features & Requirements Matrix
-
-| Requirement | Implementation Detail | Status |
-| :--- | :--- | :---: |
-| **Attractive Hero Section** | Headliner spotlight, live statistics, quick event search bar, and glowing mesh background. | ✅ Complete |
-| **Event Discovery & Cards** | Dynamic cards displaying cover image, category badge, date, venue, short description, and seat capacity progress bar. | ✅ Complete |
-| **Real-Time Live Search** | Instant substring matching across titles, descriptions, venues, speakers, and keyword tags. | ✅ Complete |
-| **Multi-Category Filter Pills** | Filter by Technology & AI, Music & Cultural, Gaming & Esports, Workshops & Hackathons, and Sports. | ✅ Complete |
-| **Advanced Filtering & Sorting** | Filter by Weekend/All Dates, Free/Paid pricing, and sort by Soonest Date, Popularity, or Name (A-Z). | ✅ Complete |
-| **Grid & List View Switcher** | Toggle dynamically between a responsive multi-column card grid and a compact list row view. | ✅ Complete |
-| **Detailed Event Modal** | Tabbed interface (Overview & Highlights, Agenda & Schedule Timeline, Featured Speakers & Guests, Venue Info). | ✅ Complete |
-| **JavaScript Form Validation** | Strict RFC regex email validation, 10-digit mobile phone check, minimum 3-character full name, seat count limits, and duplicate registration protection. | ✅ Complete |
-| **Confirmation & Pass Generation** | Confetti celebration burst, dynamic canvas QR code generation, booking reference ID, and printable boarding pass stub. | ✅ Complete |
-| **Responsive UI/UX** | Mobile-first architecture with mobile hamburger menu, fluid typography, and media query breakpoints (mobile, tablet, desktop). | ✅ Complete |
+### Core Objectives:
+- **Event Discovery & Exploration:** Enable users to browse upcoming and featured events with essential metadata including dates, venues, categories, ticket pricing, and real-time seat availability.
+- **Search & Multi-Filtering:** Provide immediate search-as-you-type indexing across event titles, descriptions, venues, speakers, and tags, complemented by category pills and sorting controls.
+- **Interactive Details & Schedule:** Deliver comprehensive modal overviews for each event, breaking down agendas into chronological timelines and introducing key speakers and hosts.
+- **Robust Client-Side Registration:** Enforce strict JavaScript-based form validation for user inputs (name, email, 10-digit phone, ticket tiers, and attendance terms), preventing double-booking through email-event verification.
+- **Digital Ticketing & Verification:** Automatically issue a stylized digital boarding pass with unique reference numbers, procedural canvas-rendered QR codes, printable CSS layouts, and celebratory confetti animations.
+- **Persistent State Management:** Maintain user bookings, custom-hosted events, and theme preferences entirely within the browser's `localStorage`.
+- **3D Interactive Immersion:** Enhance visual engagement through a pure-canvas 3D planetary gyroscope with shaded polyhedral core that responds to user drag/mouse interactions, alongside multi-plane 3D card tilt parallax.
 
 ---
 
-## 🏆 Bonus Challenges Implemented
+## 2. System Implementation
 
-### 1. 🌓 Persistent Dark / Light Theme Mode
-- Complete dual-theme CSS custom variable architecture (`[data-theme="dark"]` / `[data-theme="light"]`).
-- Persistent user preference stored in `localStorage`.
-- Automatic detection of system preference (`prefers-color-scheme`).
-- Seamless transitions with Sun/Moon icon toggle in the navigation bar.
+The platform is engineered using modern, semantic web standards (HTML5, modular CSS3, and ES6+ JavaScript) without heavy external framework dependencies, ensuring fast loading speeds, zero build friction, and complete offline capability.
 
-### 2. ⏳ Real-Time Event Countdown Timers
-- Live ticking countdown clock updating days, hours, minutes, and seconds every 1000ms.
-- Headliner mega-event spotlight that computes remaining time until the opening keynote.
-
-### 3. 💾 Full LocalStorage Data Management
-- **Registrations Store:** Automatically saves user registrations with unique ticket IDs, seat counts, and timestamps.
-- **"My Bookings" Slide-Over Drawer:** Dedicated panel where users can review all their registered tickets, re-open their digital pass, or cancel reservations (which automatically recalculates and releases seats back to the event capacity pool).
-- **Favorites / Wishlist:** Heart bookmark toggle on each event card that persists across browser sessions.
-- **"Host an Event" Publisher:** Enables students and club organizers to submit new events with custom dates, capacities, and venues; new events are immediately saved to `localStorage` and injected into the catalog.
-
-### 4. ✨ 3D Interactive Animations & Micro-Interactions
-- **3D Planetary Gyroscope & Shaded Gem Engine (`scene3d.js`):** 3 concentric rotating 3D gimbal rings with luminous orbiting beads, surrounding a 3D faceted polyhedron gem with light-shaded translucent faces.
-- **Interactive Drag-to-Rotate in 3D:** Click and drag with mouse or touch on mobile to spin the 3D geometry freely with physics inertia.
-- **Deep 3D Spatial Multi-Plane Parallax:** Event cards tilt dynamically in 3D (`perspective: 1000px`, `rotateX`, `rotateY`), while badges and buttons physically lift off the card (`translateZ: 50px`) accompanied by a dynamic specular light sheen.
-- **3D Ticket Flip Animation:** Reveals the digital boarding pass with an authentic perspective 3D flip when bookings are confirmed.
-- Custom pure-JavaScript canvas confetti physics engine on successful bookings.
-- Smooth modal fade-in and backdrop blur effects.
-- Dynamic input error shake animations and field status cues (green glow for valid, red for errors).
-
----
-
-## 📂 Project Architecture & Directory Structure
-
+### 2.1 File & Directory Architecture
 ```
 susho web project/
-├── index.html              # Main HTML5 Single-Page Application entry point
-├── README.md               # Detailed project documentation and deployment guide
-├── .gitignore              # Standard git exclusion file
+├── index.html              # Semantic HTML5 Single-Page Application entry point
+├── README.md               # Project description and implementation documentation
+├── .gitignore              # Git exclusion rules
 └── assets/
     ├── css/
-    │   ├── styles.css      # Design tokens, themes, layouts, modals, 3D glares & print styles
-    │   └── animations.css  # Keyframes, 3D ticket flip, confetti canvas, shake, and pulse effects
+    │   ├── styles.css      # Design tokens, CSS variables, dark/light themes, layouts & print styles
+    │   └── animations.css  # 3D ticket flip, confetti physics, pulse, and shake keyframes
     └── js/
         ├── data.js         # Curated realistic initial events dataset
-        ├── storage.js      # LocalStorage engine for bookings, favorites & custom events
-        ├── validation.js   # Real-time form validation rules & error UI
-        ├── ticket.js       # Dynamic QR code generation & confetti engine
-        ├── scene3d.js      # Interactive 3D particle constellation & card tilt engine
-        └── app.js          # Main application controller, UI event bindings & filters
+        ├── storage.js      # LocalStorage persistence manager (Registrations, Favorites, Custom Events)
+        ├── validation.js   # Real-time form validation rules & error UI handler
+        ├── ticket.js       # Dynamic procedural QR code & digital boarding pass generator
+        ├── scene3d.js      # 3D interactive planetary gyroscope, shaded gem core & card tilt
+        └── app.js          # Main application controller, UI event bindings & filtering engine
 ```
 
 ---
 
-## 🌐 Live Deployed Links & Repository
+### 2.2 Technical Implementation Details
 
-- **GitHub Repository:** [https://github.com/Sushobhanbeaster/event-horizon](https://github.com/Sushobhanbeaster/event-horizon)
-- **Live Website (GitHub Pages):** [https://sushobhanbeaster.github.io/event-horizon/](https://sushobhanbeaster.github.io/event-horizon/)
+#### A. Data Model & Storage Engine (`assets/js/data.js` & `assets/js/storage.js`)
+- **Initial Dataset:** Pre-configured with realistic campus events spanning Technology & AI, Music & Cultural, Gaming & Esports, Workshops, and Sports.
+- **Unified Event Store:** The `StorageManager` dynamically combines default events with user-created events stored under `pulse_events_custom_v1`.
+- **Registrations & Bookings:** Stores confirmed passes with unique identifiers (`TKT-XXXXXX`), reference numbers (`EH-2026-XXXX`), seat allocations, and timestamps under `pulse_events_registrations_v1`.
+- **Seat Allocation Synchronization:** Automatically recalculates event capacity when new registrations are booked or cancelled.
+- **Favorites / Wishlist:** Stores saved event IDs in a persistent array, updating UI bookmark states reactively.
 
----
+#### B. Discovery, Search & Filtering Algorithm (`assets/js/app.js`)
+- **Real-Time Search:** Executes sub-string searches across `title`, `shortDescription`, `venue`, and `tags` simultaneously upon `input` events.
+- **Category Filter Pills:** Filters catalog items based on assigned category keys (`tech`, `music`, `gaming`, `workshop`, `sports`, `all`).
+- **Compound Filters:** Allows combining category filters with date constraints (Weekend Specials) and pricing models (Free vs. Paid).
+- **Sort Pipeline:** Dynamically orders items by chronological date, popularity (registered seats), or alphabetical name.
+- **View Mode Switcher:** Toggles between CSS Grid (`minmax(340px, 1fr)`) and compact horizontal List views without re-fetching data.
 
-## 🛠️ Technology Stack
+#### C. Real-Time Form Validation Engine (`assets/js/validation.js`)
+- **Full Name Validation:** Requires a minimum of 3 alphabetical characters; rejects numbers and unapproved symbols.
+- **RFC Email Validation:** Regex verification against standard email patterns (`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`).
+- **Anti-Duplicate Booking Protection:** Cross-checks the entered email against existing registrations for the selected event in `localStorage`.
+- **Phone Number Sanitation & Validation:** Strips prefixes (`+91`, `0`, spaces, dashes) and verifies that the remaining value is a valid 10-digit mobile number starting with 6, 7, 8, or 9.
+- **Dynamic Price Breakdown:** Computes total payable amounts in real-time according to ticket quantity (1 to 5) and pass tier (General Admission, Student 30% discount, or VIP surcharge).
+- **Visual Feedback:** Applies inline green border feedback for valid inputs and animated shake alerts with descriptive error labels for invalid inputs.
 
-- **Markup:** HTML5 (Semantic elements: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`)
-- **Styling:** CSS3 (CSS Custom Properties, Flexbox, CSS Grid, Glassmorphism `backdrop-filter`, `@media print`)
-- **Scripting:** Modern JavaScript (ES6+ Classes, Arrow Functions, LocalStorage API, HTML5 Canvas API, DOM Manipulation)
-- **Zero External Dependencies:** Built without heavy third-party runtime libraries, ensuring lightning-fast load times, zero broken links, and 100% offline reliability.
+#### D. Digital Boarding Pass & Verification (`assets/js/ticket.js`)
+- **Procedural Canvas QR Generator:** Draws an authentic 21×21 matrix QR code directly on an HTML5 `<canvas>` using data-derived pseudo-random seeding, encoding booking reference, attendee name, and event date.
+- **Print Formatting:** Implements a dedicated `@media print` stylesheet that isolates the ticket card, suppresses background web chrome, and formats an official printable pass stub.
+- **Confetti Celebration Physics:** Features a pure-JavaScript canvas particle engine simulating gravity, wind resistance, and rotational drag upon registration confirmation.
 
----
+#### E. 3D Holographic Engine & Spatial Parallax (`assets/js/scene3d.js`)
+- **3D Planetary Gyroscope Rings:** Renders 3 concentric, rotating 3D gimbal rings with illuminated orbiting beads using 3D perspective projection (`scale = focalLength / (focalLength + z)`).
+- **Shaded Polyhedral Gem Core:** Computes triangular facet surface normals and 2D cross-product vectors to achieve real-time backface culling, depth sorting (Painter's Algorithm), and light intensity shading.
+- **Interactive Drag Rotation:** Tracks mouse and touch drag deltas to apply 3D rotational momentum and inertia to the core geometry.
+- **Spatial Layer Parallax:** Enhances event cards with dynamic 3D perspective tilt (`rotateX`, `rotateY`) while badges, price tags, and buttons physically elevate along the Z-axis (`translateZ(50px)`) with specular light reflections.
 
-## 🚀 Local Setup & Running Instructions
-
-1. **Clone or Download the Repository:**
-   ```bash
-   git clone <your-repository-url>
-   cd "susho web project"
-   ```
-
-2. **Run the Project:**
-   - **Option A (Instant Direct Open):** Simply double-click `index.html` to open it in any modern browser (Chrome, Edge, Firefox, Safari).
-   - **Option B (VS Code Live Server):** Right-click `index.html` inside VS Code and select **"Open with Live Server"**.
-   - **Option C (Python local server):**
-     ```bash
-     python -m http.server 3000
-     ```
-     Then open `http://localhost:3000` in your browser.
-
----
-
-## 🌐 Deployment Instructions (Vercel, Netlify, GitHub Pages)
-
-### Option 1: Deploy on GitHub Pages (Recommended for Academic Submissions)
-1. Initialize Git and commit the project files:
-   ```bash
-   git add .
-   git commit -m "feat: complete responsive event management website"
-   ```
-2. Create a new repository on your GitHub account (e.g., `event-horizon`).
-3. Link and push to GitHub:
-   ```bash
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git branch -M main
-   git push -u origin main
-   ```
-4. In your GitHub repository:
-   - Go to **Settings** > **Pages**.
-   - Under **Build and deployment** > **Branch**, select `main` and root `/`.
-   - Click **Save**. Your site will be live at `https://<your-username>.github.io/<repo-name>/`.
-
-### Option 2: Deploy on Netlify
-1. Go to [Netlify.com](https://www.netlify.com/) and log in.
-2. Click **"Add new site"** > **"Deploy manually"** (or connect your GitHub repository).
-3. Drag and drop the `susho web project` root folder into the Netlify drop zone.
-4. Your website is deployed instantly with a live `.netlify.app` URL.
-
-### Option 3: Deploy on Vercel
-1. Go to [Vercel.com](https://vercel.com/) and log in with GitHub.
-2. Click **"Add New..."** > **"Project"**.
-3. Import your GitHub repository.
-4. Leave settings default (Root Directory `./`) and click **Deploy**.
-5. Your project will be live with an SSL-secured `.vercel.app` domain.
+#### F. Dual Theme Architecture (`assets/css/styles.css`)
+- **CSS Custom Properties:** Structured token architecture defining body, surface, text, border, and glow colors for both `[data-theme="dark"]` and `[data-theme="light"]`.
+- **System Sync:** Checks `prefers-color-scheme` on initial load and synchronizes user toggles with `localStorage`.
 
 ---
 
-## 📝 Form Validation Specifications
+## 3. Technology Stack
 
-The registration system implements the following rigorous validation rules:
-- **Full Name:** Minimum 3 characters; alphabetical characters, spaces, periods, and hyphens only.
-- **Email Address:** Strictly validated against standard RFC-compliant email regular expressions (`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`).
-- **Duplicate Registration Check:** Prevents a user from registering twice for the same event with the same email address.
-- **Phone Number:** Validates 10-digit mobile numbers with common prefix sanitation (`+91`, `0`, spaces, and dashes).
-- **Ticket Quantity:** Constrained to positive integers between 1 and 5.
-- **Terms Acceptance:** Requires explicit confirmation of the event code of conduct checkbox.
-
----
-
-## 🎫 Digital Ticket Pass & Print Verification
-- Each confirmed registration generates a unique **Booking Reference Code** (`EH-2026-XXXX`).
-- An algorithmic **QR Code** is procedurally drawn on an HTML5 `<canvas>` containing verified booking metadata.
-- Includes full `@media print` CSS rules allowing attendees to directly click **"Download / Print Pass"** to produce an official clean PDF or printed pass with background graphics preserved.
-
----
-
-## 📄 License & Academic Integrity
-Developed as part of the **K-Explore Web Designing Assignment**. Clean, modular, well-commented source code written in accordance with high UI/UX and accessibility standards.
-
+- **Markup:** Semantic HTML5 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, `<dialog>`)
+- **Styling:** CSS3 (CSS Variables, Flexbox, CSS Grid, Glassmorphism, 3D Transforms, Media Queries, Print Rules)
+- **Scripting:** Vanilla JavaScript (ES6+ Classes, LocalStorage API, HTML5 Canvas 2D API, DOM Manipulation)
+- **Zero External Dependencies:** Built without external JavaScript libraries or heavy frameworks, ensuring 100% offline reliability, instant load times, and clean evaluation.
