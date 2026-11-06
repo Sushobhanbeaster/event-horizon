@@ -162,9 +162,9 @@ const TicketManager = {
       <div class="ticket-card" id="printable-ticket">
         <div class="ticket-header">
           <div class="ticket-brand">
-            <span class="ticket-logo-icon">⚡</span>
+            <span class="ticket-logo-icon">🌌</span>
             <div>
-              <div class="ticket-brand-name">K-Pulse Events Pass</div>
+              <div class="ticket-brand-name">Event Horizon Official Pass</div>
               <div class="ticket-badge">CONFIRMED ATTENDEE</div>
             </div>
           </div>

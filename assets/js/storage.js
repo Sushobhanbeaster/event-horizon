@@ -59,7 +59,7 @@ const StorageManager = {
             avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
           }
         ],
-        tags: [eventData.category, "Campus", "PulseEvent"],
+        tags: [eventData.category, "Campus", "EventHorizon"],
         ...eventData
       };
 
@@ -94,7 +94,7 @@ const StorageManager = {
       
       const registration = {
         id: "TKT-" + Math.floor(100000 + Math.random() * 900000),
-        bookingRef: "KP-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000),
+        bookingRef: "EH-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000),
         bookedAt: new Date().toISOString(),
         ...data
       };

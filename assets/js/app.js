@@ -1,5 +1,5 @@
 /**
- * PulseEvents - Main Application Controller
+ * Event Horizon - Main Application Controller
  * Handles UI state, filtering, search, modals, countdown timers, and theme switching.
  */
 
@@ -707,7 +707,7 @@ class PulseApp {
       priceLabel: price === 0 ? "Free" : "₹" + price,
       image,
       shortDescription: shortDesc,
-      fullDescription: shortDesc + " This event is organized by " + organizer + " through the PulseEvents campus platform.",
+      fullDescription: shortDesc + " This event is organized by " + organizer + " through the Event Horizon campus platform.",
       organizer
     });
 

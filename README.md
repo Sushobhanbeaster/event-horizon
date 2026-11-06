@@ -1,4 +1,4 @@
-# PulseEvents ⚡ | Next-Gen Responsive Event Management Platform
+# Event Horizon 🌌 | Next-Gen Responsive Event Management Platform
 > **K-Explore Web Designing Project & Evaluation**  
 > Built with Semantic HTML5, CSS3 Design Tokens & Glassmorphism, and Vanilla JavaScript (ES6+).
 
@@ -6,7 +6,7 @@
 
 ## 🌟 Executive Summary
 
-**PulseEvents** is a modern, responsive, and visually captivating event discovery, management, and registration web application. Designed to cater to college fests, tech conventions, hackathons, and cultural festivals, the platform delivers an engaging user experience with intuitive navigation, fluid animations, real-time client-side form validation, and instant digital boarding pass generation.
+**Event Horizon** is a modern, responsive, and visually captivating event discovery, management, and registration web application. Designed to cater to college fests, tech conventions, hackathons, and cultural festivals, the platform delivers an engaging user experience with intuitive navigation, fluid 3D animations, real-time client-side form validation, and instant digital boarding pass generation.
 
 ---
 
@@ -114,7 +114,7 @@ susho web project/
    git add .
    git commit -m "feat: complete responsive event management website"
    ```
-2. Create a new repository on your GitHub account (e.g., `pulse-events-kexplore`).
+2. Create a new repository on your GitHub account (e.g., `event-horizon`).
 3. Link and push to GitHub:
    ```bash
    git remote add origin https://github.com/<your-username>/<repo-name>.git
