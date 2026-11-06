@@ -464,9 +464,9 @@ img {
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.85;
+  pointer-events: auto;
+  z-index: 1;
+  opacity: 0.95;
 }
 
 .hero-glow-blob {
@@ -484,10 +484,16 @@ img {
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
+  pointer-events: none;
+}
+
+.hero-content > * {
+  pointer-events: auto;
+}
 }
 
 .hero-tagline {
@@ -868,6 +874,37 @@ img {
 .event-card:hover {
   box-shadow: var(--shadow-lg), var(--shadow-glow);
   border-color: var(--border-strong);
+}
+
+/* 3D Spatial Layer Parallax (Multi-plane depth) */
+.event-card .card-media {
+  transition: transform 0.25s ease;
+  transform-style: preserve-3d;
+}
+
+.event-card:hover .card-badges {
+  transform: translateZ(50px);
+  transition: transform 0.25s ease;
+}
+
+.event-card:hover .card-price-tag {
+  transform: translateZ(45px);
+  transition: transform 0.25s ease;
+}
+
+.event-card:hover .btn-fav {
+  transform: translateZ(45px);
+  transition: transform 0.25s ease;
+}
+
+.event-card:hover .card-title {
+  transform: translateZ(25px);
+  transition: transform 0.25s ease;
+}
+
+.event-card:hover .card-actions {
+  transform: translateZ(35px);
+  transition: transform 0.25s ease;
 }
 
 .event-card.featured-card {
