@@ -46,9 +46,10 @@
 - **"Host an Event" Publisher:** Enables students and club organizers to submit new events with custom dates, capacities, and venues; new events are immediately saved to `localStorage` and injected into the catalog.
 
 ### 4. ✨ 3D Interactive Animations & Micro-Interactions
-- **Interactive 3D Hero Constellation (`scene3d.js`):** Uniform Fibonacci sphere point cloud with rotating wireframe polyhedron reacting dynamically to mouse cursor movements with smooth inertia physics.
-- **3D Perspective Card Tilt:** Event cards dynamically tilt in 3D perspective (`rotateX`, `rotateY`) on cursor hover with real-time specular light reflections / glares.
-- **3D Ticket Flip Animation:** Reveals the digital boarding pass with a perspective 3D flip when bookings are confirmed.
+- **3D Planetary Gyroscope & Shaded Gem Engine (`scene3d.js`):** 3 concentric rotating 3D gimbal rings with luminous orbiting beads, surrounding a 3D faceted polyhedron gem with light-shaded translucent faces.
+- **Interactive Drag-to-Rotate in 3D:** Click and drag with mouse or touch on mobile to spin the 3D geometry freely with physics inertia.
+- **Deep 3D Spatial Multi-Plane Parallax:** Event cards tilt dynamically in 3D (`perspective: 1000px`, `rotateX`, `rotateY`), while badges and buttons physically lift off the card (`translateZ: 50px`) accompanied by a dynamic specular light sheen.
+- **3D Ticket Flip Animation:** Reveals the digital boarding pass with an authentic perspective 3D flip when bookings are confirmed.
 - Custom pure-JavaScript canvas confetti physics engine on successful bookings.
 - Smooth modal fade-in and backdrop blur effects.
 - Dynamic input error shake animations and field status cues (green glow for valid, red for errors).
