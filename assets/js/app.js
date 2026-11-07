@@ -740,17 +740,17 @@ class PulseApp {
     const form = e.target;
     const formData = new FormData(form);
 
-    const title = formData.get("eventTitle").trim();
-    const category = formData.get("eventCategory");
-    const date = formData.get("eventDate");
-    const time = formData.get("eventTime").trim();
-    const venue = formData.get("eventVenue").trim();
-    const city = formData.get("eventCity").trim() || "Bhubaneswar";
+    const title = (formData.get("eventTitle") || "").trim();
+    const category = formData.get("eventCategory") || "tech";
+    const date = formData.get("eventDate") || "";
+    const time = (formData.get("eventTime") || "").trim();
+    const venue = (formData.get("eventVenue") || "").trim();
+    const city = (formData.get("eventCity") || "Campus").trim();
     const capacity = parseInt(formData.get("eventCapacity"), 10) || 100;
     const price = parseInt(formData.get("eventPrice"), 10) || 0;
-    const shortDesc = formData.get("eventShortDesc").trim();
-    const organizer = formData.get("eventOrganizer").trim();
-    let image = formData.get("eventImage") ? formData.get("eventImage").trim() : "";
+    const shortDesc = (formData.get("eventShortDesc") || "").trim();
+    const organizer = (formData.get("eventOrganizer") || "Event Host").trim();
+    let image = (formData.get("eventImage") || "").trim();
 
     if (!image) {
       image = FALLBACK_CATEGORY_IMAGES[category] || FALLBACK_CATEGORY_IMAGES.tech;
@@ -761,10 +761,15 @@ class PulseApp {
       return;
     }
 
-    // Format display date
-    const d = new Date(date);
-    const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
-    const displayDate = d.toLocaleDateString("en-US", options);
+    // Format display date safely
+    let displayDate = date;
+    try {
+      const d = new Date(date + "T00:00:00");
+      if (!isNaN(d.getTime())) {
+        const options = { weekday: "short", year: "numeric", month: "short", day: "numeric" };
+        displayDate = d.toLocaleDateString("en-US", options);
+      }
+    } catch (_) {}
 
     const newEvent = StorageManager.createEvent({
       title,
@@ -772,7 +777,7 @@ class PulseApp {
       categoryLabel: this.getCategoryLabel(category),
       date,
       displayDate,
-      time,
+      time: time || "10:00 AM - 04:00 PM",
       venue,
       city,
       capacity,
@@ -780,16 +785,38 @@ class PulseApp {
       priceLabel: price === 0 ? "Free" : "₹" + price,
       image,
       shortDescription: shortDesc,
-      fullDescription: shortDesc + " This event is organized by " + organizer + " through the Event Horizon campus platform.",
+      fullDescription: shortDesc + " Organized by " + organizer + " through Event Horizon.",
       organizer
     });
 
     if (newEvent) {
       form.reset();
       this.closeModal("create-event-modal");
+
+      // Reset category filter to 'all' so new event is immediately visible
+      this.activeCategory = "all";
+      this.searchQuery = "";
+      document.querySelectorAll(".category-pill").forEach(p => {
+        p.classList.toggle("active", p.dataset.category === "all");
+      });
+      const searchInput = document.getElementById("search-input");
+      if (searchInput) searchInput.value = "";
+
+      // Reload and re-render events
       this.loadEvents();
       this.renderEvents();
-      this.showToast("🚀 Event published successfully!", "success");
+      this.showToast("🚀 Event published successfully to the catalog!", "success");
+
+      // Smooth scroll to catalog
+      setTimeout(() => {
+        const newCard = document.querySelector(`[data-id="${newEvent.id}"]`);
+        if (newCard) {
+          newCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+          const eventsSection = document.getElementById("events-section");
+          if (eventsSection) eventsSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 250);
     }
   }
 

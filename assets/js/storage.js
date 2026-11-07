@@ -24,7 +24,7 @@ const StorageManager = {
   getAllEvents() {
     try {
       const customEvents = this.getCustomEvents();
-      return [...INITIAL_EVENTS, ...customEvents];
+      return [...customEvents, ...INITIAL_EVENTS];
     } catch (e) {
       console.warn("StorageManager: Failed to read custom events", e);
       return [...INITIAL_EVENTS];
