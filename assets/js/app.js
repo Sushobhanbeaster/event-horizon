@@ -28,6 +28,48 @@ class PulseApp {
     this.startFeaturedCountdown();
     this.updateTicketsBadge();
     this.renderEvents();
+
+    // Initial background cloud sync across all devices
+    this.syncCloudData(true);
+
+    // Periodic cloud refresh every 25 seconds
+    setInterval(() => this.syncCloudData(true), 25000);
+
+    // Re-sync instantly when user unlocks phone or switches back to tab
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        this.syncCloudData(true);
+      }
+    });
+  }
+
+  /**
+   * Global Cloud Synchronization Across Devices
+   */
+  async syncCloudData(silent = true) {
+    const dot = document.getElementById("sync-indicator-dot");
+    const text = document.getElementById("drawer-sync-status");
+    if (dot) dot.className = "sync-dot syncing";
+    if (text) text.textContent = "Syncing cloud...";
+
+    try {
+      const res = await StorageManager.syncFromCloud();
+      this.loadEvents();
+      this.updateTicketsBadge();
+      this.renderEvents();
+
+      if (dot) dot.className = "sync-dot live";
+      if (text) text.textContent = "Cross-Device Synced";
+
+      if (!silent && res && res.success) {
+        this.showToast("☁️ Synced tickets & events across devices!", "success");
+      }
+      return res;
+    } catch (e) {
+      if (dot) dot.className = "sync-dot";
+      if (text) text.textContent = "Offline / Local Mode";
+      return { success: false };
+    }
   }
 
   /**
@@ -541,21 +583,54 @@ class PulseApp {
   }
 
   /**
-   * Open "My Bookings" Drawer
+   * Open "My Bookings" Drawer with Live Cloud Sync
    */
-  openMyBookingsDrawer() {
+  async openMyBookingsDrawer() {
+    const drawer = document.getElementById("bookings-drawer");
+    const overlay = document.getElementById("drawer-overlay");
+    if (drawer) drawer.classList.add("open");
+    if (overlay) overlay.classList.add("open");
+
+    // Clear search filter input when opening
+    const searchInput = document.getElementById("drawer-ticket-search");
+    if (searchInput) searchInput.value = "";
+
+    // Immediate render from local cache
+    this.renderMyBookingsList();
+
+    // Background fetch latest cloud updates and re-render
+    await this.syncCloudData(true);
+    this.renderMyBookingsList(searchInput ? searchInput.value : "");
+  }
+
+  /**
+   * Render bookings into the slide-over drawer (supports instant search/filter)
+   */
+  renderMyBookingsList(filterQuery = "") {
     const listContainer = document.getElementById("my-bookings-list");
     if (!listContainer) return;
 
-    const registrations = StorageManager.getRegistrations();
+    let registrations = StorageManager.getRegistrations();
+    const query = (filterQuery || "").toLowerCase().trim();
+
+    if (query) {
+      registrations = registrations.filter(r => 
+        (r.bookingRef && r.bookingRef.toLowerCase().includes(query)) ||
+        (r.email && r.email.toLowerCase().includes(query)) ||
+        (r.fullName && r.fullName.toLowerCase().includes(query)) ||
+        (r.eventTitle && r.eventTitle.toLowerCase().includes(query))
+      );
+    }
 
     if (registrations.length === 0) {
       listContainer.innerHTML = `
         <div class="empty-state">
           <div class="empty-icon">🎟️</div>
-          <h4 class="empty-title">No bookings yet</h4>
-          <p class="empty-text">Explore upcoming events and reserve your spot today!</p>
-          <button class="btn btn-primary" id="drawer-explore-btn">Browse Events</button>
+          <h4 class="empty-title">${query ? "No matching passes found" : "No bookings yet"}</h4>
+          <p class="empty-text">
+            ${query ? "Try searching by registered email or reference code (e.g. EH-2026-...)" : "Explore upcoming events and reserve your spot today! All tickets automatically sync across your phone and laptop."}
+          </p>
+          ${query ? "" : '<button class="btn btn-primary" id="drawer-explore-btn">Browse Events</button>'}
         </div>
       `;
       const exploreBtn = document.getElementById("drawer-explore-btn");
@@ -588,6 +663,7 @@ class PulseApp {
               <span>📅 ${event.displayDate}</span>
               <span>📍 ${event.venue}</span>
               <span>👤 ${reg.fullName} (${reg.ticketQuantity || 1} Pass)</span>
+              <span style="font-size: 0.75rem; color: var(--text-muted); word-break: break-all;">📧 ${reg.email || ""}</span>
             </div>
             <div class="booking-item-actions">
               <button class="btn btn-sm btn-outline" data-action="view-pass" data-reg-id="${reg.id}">
@@ -601,11 +677,6 @@ class PulseApp {
         `;
       }).join("");
     }
-
-    const drawer = document.getElementById("bookings-drawer");
-    const overlay = document.getElementById("drawer-overlay");
-    if (drawer) drawer.classList.add("open");
-    if (overlay) overlay.classList.add("open");
   }
 
   closeDrawer() {
@@ -618,8 +689,8 @@ class PulseApp {
   /**
    * Cancel an existing booking
    */
-  cancelBooking(registrationId) {
-    if (!confirm("Are you sure you want to cancel this registration? Your seat will be released.")) {
+  async cancelBooking(registrationId) {
+    if (!confirm("Are you sure you want to cancel this registration? Your seat will be released across all devices.")) {
       return;
     }
 
@@ -627,9 +698,11 @@ class PulseApp {
     if (success) {
       this.showToast("Registration cancelled successfully.", "info");
       this.updateTicketsBadge();
-      this.openMyBookingsDrawer(); // Refresh drawer view
+      const searchInput = document.getElementById("drawer-ticket-search");
+      this.renderMyBookingsList(searchInput ? searchInput.value : "");
       this.loadEvents();
       this.renderEvents();
+      await this.syncCloudData(true);
     }
   }
 
@@ -954,6 +1027,24 @@ class PulseApp {
     const drawerOverlay = document.getElementById("drawer-overlay");
     if (closeDrawerBtn) closeDrawerBtn.addEventListener("click", () => this.closeDrawer());
     if (drawerOverlay) drawerOverlay.addEventListener("click", () => this.closeDrawer());
+
+    // Drawer Manual Sync Button
+    const manualSyncBtn = document.getElementById("btn-manual-sync");
+    if (manualSyncBtn) {
+      manualSyncBtn.addEventListener("click", async () => {
+        await this.syncCloudData(false);
+        const searchInput = document.getElementById("drawer-ticket-search");
+        this.renderMyBookingsList(searchInput ? searchInput.value : "");
+      });
+    }
+
+    // Drawer Ticket Instant Search / Filter
+    const drawerSearch = document.getElementById("drawer-ticket-search");
+    if (drawerSearch) {
+      drawerSearch.addEventListener("input", (e) => {
+        this.renderMyBookingsList(e.target.value);
+      });
+    }
 
     // Drawer List Actions Delegation (View Pass & Cancel)
     const bookingsList = document.getElementById("my-bookings-list");

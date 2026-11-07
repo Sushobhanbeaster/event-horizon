@@ -46,11 +46,13 @@ susho web project/
 
 ### 2.2 Technical Implementation Details
 
-#### A. Data Model & Storage Engine (`assets/js/data.js` & `assets/js/storage.js`)
+#### A. Data Model, Storage Engine & Cloud Sync (`assets/js/data.js` & `assets/js/storage.js`)
 - **Initial Dataset:** Pre-configured with realistic campus events spanning Technology & AI, Music & Cultural, Gaming & Esports, Workshops, and Sports.
-- **Unified Event Store:** The `StorageManager` dynamically combines default events with user-created events stored under `pulse_events_custom_v1`.
-- **Registrations & Bookings:** Stores confirmed passes with unique identifiers (`TKT-XXXXXX`), reference numbers (`EH-2026-XXXX`), seat allocations, and timestamps under `pulse_events_registrations_v1`.
-- **Seat Allocation Synchronization:** Automatically recalculates event capacity when new registrations are booked or cancelled.
+- **Unified Event Store:** The `StorageManager` dynamically combines default events with user-created events stored under `event_horizon_custom_v2`.
+- **Registrations & Bookings:** Stores confirmed passes with unique identifiers (`TKT-XXXXXX`), reference numbers (`EH-2026-XXXX`), seat allocations, and timestamps.
+- **Cross-Device Cloud Synchronization:** Automatically synchronizes confirmed bookings and custom events to a global cloud store via RESTful endpoints, ensuring that tickets booked on mobile devices, tablets, or laptops immediately reflect across all devices in real-time.
+- **Instant Pass Lookup:** Attendees can instantly locate and view their passes from any device by entering their registered email or booking reference in the slide-over drawer search bar.
+- **Seat Allocation Synchronization:** Automatically recalculates event capacity when new registrations are booked or cancelled across devices.
 - **Favorites / Wishlist:** Stores saved event IDs in a persistent array, updating UI bookmark states reactively.
 
 #### B. Discovery, Search & Filtering Algorithm (`assets/js/app.js`)

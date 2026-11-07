@@ -406,8 +406,24 @@
       <button class="modal-close-btn" id="btn-close-drawer" style="position: static;" aria-label="Close drawer">✕</button>
     </div>
 
+    <!-- Live Cloud Sync Status Bar -->
+    <div class="drawer-sync-bar">
+      <div class="sync-status">
+        <span class="sync-dot live" id="sync-indicator-dot"></span>
+        <span class="sync-text" id="drawer-sync-status">Cross-Device Synced</span>
+      </div>
+      <button class="btn btn-xs btn-outline" id="btn-manual-sync" title="Sync latest tickets across devices">
+        🔄 Refresh
+      </button>
+    </div>
+
+    <!-- Search / Retrieve Pass Input -->
+    <div class="drawer-lookup-box">
+      <input type="text" id="drawer-ticket-search" class="form-input" placeholder="🔍 Find by Email or Ref # (e.g. EH-2026-...)" />
+    </div>
+
     <div class="drawer-body" id="my-bookings-list">
-      <!-- Dynamically populated from localStorage -->
+      <!-- Dynamically populated from localStorage and Cloud Sync -->
     </div>
   </aside>
 
