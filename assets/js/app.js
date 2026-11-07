@@ -694,7 +694,7 @@ class PulseApp {
       return;
     }
 
-    const success = StorageManager.cancelRegistration(registrationId);
+    const success = await StorageManager.cancelRegistration(registrationId);
     if (success) {
       this.showToast("Registration cancelled successfully.", "info");
       this.updateTicketsBadge();
@@ -702,7 +702,6 @@ class PulseApp {
       this.renderMyBookingsList(searchInput ? searchInput.value : "");
       this.loadEvents();
       this.renderEvents();
-      await this.syncCloudData(true);
     }
   }
 
